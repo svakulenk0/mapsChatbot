@@ -35,10 +35,7 @@ def get_route(origin, destination, mode):
     return directions_result
 
 
-def test_get_route(origin='WU Wien', destination='Zoo Schoenbrunn'):
-    '''
-    Unit test for Google Maps routes API for different transport options
-    '''
+def rank_alternative_routes(origin, destination):
     estimates = []
     for mode, transport in MODES.items():
         response = get_route(origin, destination, mode)
@@ -52,8 +49,14 @@ def test_get_route(origin='WU Wien', destination='Zoo Schoenbrunn'):
     while estimates:
         time, (transport, time_str) = heappop(estimates)
         route += "\n%s %s" % (transport, time_str)
+    return route
 
-    print(route)
+
+def test_get_route(origin='WU Wien', destination='Zoo Schoenbrunn'):
+    '''
+    Unit test for Google Maps routes API for different transport options
+    '''
+    print(rank_alternative_routes(origin, destination))
 
 
 if __name__ == '__main__':
