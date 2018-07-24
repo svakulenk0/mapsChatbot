@@ -2,7 +2,9 @@
 
 Chatbot that helps you to find routes through Google API
 
-(https://github.com/googlemaps/google-maps-services-python)
+## Requirements
+
+* [googlemaps](https://github.com/googlemaps/google-maps-services-python)
 
 
 ## Similar projects
