@@ -14,26 +14,46 @@ https://github.com/googlemaps/google-maps-services-python
 '''
 import googlemaps
 from datetime import datetime
+from heapq import heappush, heappop
 
 from settings import API_KEY
+
+MODES = {"driving": "car", "transit": "public transport", "bicycling": "bicycle"}
 
 
 # connect to Google Maps API
 gmaps = googlemaps.Client(key=API_KEY)
 
 
-def get_route(origin, destination):
+def get_route(origin, destination, mode):
     # Request directions via public transit
     now = datetime.now()
-    directions_result = gmaps.directions("Sydney Town Hall",
-                                         "Parramatta, NSW",
-                                         mode="transit",
-                                         departure_time=now)
+    directions_result = gmaps.directions(origin,
+                                         destination,
+                                         mode=mode)
+                                         # departure_time=now)
     return directions_result
 
 
 def test_get_route(origin='WU Wien', destination='Zoo Schoenbrunn'):
-    print get_route(origin, destination)
+    '''
+    Unit test for Google Maps routes API for different transport options
+    '''
+    estimates = []
+    for mode, transport in MODES.items():
+        response = get_route(origin, destination, mode)
+        
+        estimate = response[0]['legs'][0]['duration']
+        heappush(estimates, (estimate['value'], (transport, estimate['text'])))
+
+    route = "From: %s" % response[0]['legs'][0]['start_address'].split(',')[0]
+    route += "\nTo: %s" % response[0]['legs'][0]['end_address'].split(',')[0]
+
+    while estimates:
+        time, (transport, time_str) = heappop(estimates)
+        route += "\n%s %s" % (transport, time_str)
+
+    print(route)
 
 
 if __name__ == '__main__':
