@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+'''
+Created on Jul 24, 2018
+
+.. codeauthor: svitlana vakulenko
+    <svitlana.vakulenko@gmail.com>
+
+Holds authentication tokens
+
+'''
+
+API_KEY = 'Fill me'
