@@ -11,4 +11,7 @@ async def start(opsdroid, config, message):
     origin = message.regex.group(1)
     destination = message.regex.group(2)
     text = rank_alternative_routes(origin, destination)
-    await message.respond(text)
+    if text:
+        await message.respond(text)
+    else:
+        await message.respond("Not sure what you mean. Could you be more specific?")

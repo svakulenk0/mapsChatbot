@@ -16,7 +16,7 @@ import googlemaps
 from datetime import datetime
 from heapq import heappush, heappop
 
-from .settings import API_KEY
+from settings import API_KEY
 
 MODES = {"driving": "car", "transit": "public transport", "bicycling": "bicycle"}
 
@@ -36,12 +36,17 @@ def get_route(origin, destination, mode):
 
 
 def rank_alternative_routes(origin, destination):
+    '''
+    Collects Google Maps routes API results for different transport options
+    '''
     estimates = []
     for mode, transport in MODES.items():
         response = get_route(origin, destination, mode)
-        
-        estimate = response[0]['legs'][0]['duration']
-        heappush(estimates, (estimate['value'], (transport, estimate['text'])))
+        if response:
+            estimate = response[0]['legs'][0]['duration']
+            heappush(estimates, (estimate['value'], (transport, estimate['text'])))
+        else:
+            return None
 
     route = "From: %s" % response[0]['legs'][0]['start_address'].split(',')[0]
     route += "\nTo: %s" % response[0]['legs'][0]['end_address'].split(',')[0]
@@ -52,12 +57,20 @@ def rank_alternative_routes(origin, destination):
     return route
 
 
-def test_get_route(origin='WU Wien', destination='Zoo Schoenbrunn'):
+def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):
     '''
-    Unit test for Google Maps routes API for different transport options
+    Test for Google Maps routes API for different transport options
     '''
     print(rank_alternative_routes(origin, destination))
 
 
+def test_none(origin='WU', destination='Zoo'):
+    '''
+    Unit test for empty result
+    '''
+    assert rank_alternative_routes(origin, destination) == None
+
+
 if __name__ == '__main__':
-    test_get_route()
+    test_none()
+    test_rank_alternative_routes()
