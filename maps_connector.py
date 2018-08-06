@@ -16,7 +16,7 @@ import googlemaps
 from datetime import datetime
 from heapq import heappush, heappop
 
-from .settings import API_KEY
+from settings import API_KEY
 
 MODES = {"driving": "car", "transit": "public transport", "bicycling": "bicycle"}
 
@@ -35,26 +35,40 @@ def get_route(origin, destination, mode):
     return directions_result
 
 
-def rank_alternative_routes(origin, destination):
-    '''
-    Collects Google Maps routes API results for different transport options
-    '''
-    estimates = []
-    for mode, transport in MODES.items():
-        response = get_route(origin, destination, mode)
-        if response:
-            estimate = response[0]['legs'][0]['duration']
-            heappush(estimates, (estimate['value'], (transport, estimate['text'])))
-        else:
-            return None
+class TripPlanner(object):
+    """Each object of the class holds information about the planned trip"""
 
-    route = "From: %s" % response[0]['legs'][0]['start_address'].split(',')[0]
-    route += "\nTo: %s" % response[0]['legs'][0]['end_address'].split(',')[0]
+    def __init__(self):
+        self.origin = None
+        self.destination = None
+        self.estimates = {'bicycle': None, 'public transport': None,  'car': None}
 
-    while estimates:
-        time, (transport, time_str) = heappop(estimates)
-        route += "\n%s %s" % (transport, time_str)
-    return route
+    def rank_alternative_routes(self, origin, destination):
+        '''
+        Collects Google Maps routes API results for different transport options
+        '''
+        self.origin = origin
+        self.destination = destination
+
+        estimates = []
+        for mode, transport in MODES.items():
+            response = get_route(origin, destination, mode)
+            if response:
+                estimate = response[0]['legs'][0]['duration']
+                # store estimates
+                self.estimates[transport] = estimate['text']
+                # rank estimates
+                heappush(estimates, (estimate['value'], (transport, estimate['text'])))
+            else:
+                return None
+
+        route = "From: %s" % response[0]['legs'][0]['start_address'].split(',')[0]
+        route += "\nTo: %s" % response[0]['legs'][0]['end_address'].split(',')[0]
+
+        while estimates:
+            time, (transport, time_str) = heappop(estimates)
+            route += "\n%s %s" % (transport, time_str)
+        return route
 
 
 def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):
