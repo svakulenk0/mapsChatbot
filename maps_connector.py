@@ -41,7 +41,7 @@ class TripPlanner(object):
     def __init__(self):
         self.origin = None
         self.destination = None
-        self.estimates = {'bicycle': None, 'public transport': None,  'car': None}
+        self.choice = None
 
     def rank_alternative_routes(self, origin, destination):
         '''
@@ -55,8 +55,6 @@ class TripPlanner(object):
             response = get_route(origin, destination, mode)
             if response:
                 estimate = response[0]['legs'][0]['duration']
-                # store estimates
-                self.estimates[transport] = estimate['text']
                 # rank estimates
                 heappush(estimates, (estimate['value'], (transport, estimate['text'])))
             else:
@@ -69,6 +67,15 @@ class TripPlanner(object):
             time, (transport, time_str) = heappop(estimates)
             route += "\n%s %s" % (transport, time_str)
         return route
+
+    def record_estimate(self, mode):
+        response = get_route(self.origin, self.destination, mode)
+        if response:
+            # save estimate
+            estimate = response[0]['legs'][0]['duration']
+            now = datetime.datetime.now()
+            self.choice = (mode, estimate, now)
+            return estimate
 
 
 def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):
