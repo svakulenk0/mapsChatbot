@@ -16,7 +16,7 @@ import googlemaps
 from datetime import datetime
 from heapq import heappush, heappop
 
-from settings import API_KEY
+from .settings import API_KEY
 
 MODES = {"driving": "car", "transit": "public transport", "bicycling": "bicycle"}
 
