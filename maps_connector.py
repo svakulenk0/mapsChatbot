@@ -74,8 +74,8 @@ class TripPlanner(object):
     def record_estimate(self, mode):
         response = get_route(self.origin, self.destination, mode)
         if response:
-            
-            now = time.time()
+            # round up 1 minute
+            now = time.time() + 60
             
             # save estimate
             if mode == 'transit':
