@@ -1,0 +1,764 @@
+{
+   "geocoded_waypoints" : [
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJv65jGssHbUcRqn7W5Wcq7VQ",
+         "types" : [ "establishment", "point_of_interest", "school", "university" ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJV02ULeCnbUcRkHFsheJ2pjs",
+         "types" : [ "establishment", "park", "point_of_interest", "zoo" ]
+      }
+   ],
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 48.219596,
+               "lng" : 16.4059318
+            },
+            "southwest" : {
+               "lat" : 48.1813284,
+               "lng" : 16.3093997
+            }
+         },
+         "copyrights" : "Map data ©2018 Google",
+         "legs" : [
+            {
+               "arrival_time" : {
+                  "text" : "11:12am",
+                  "time_zone" : "Europe/Vienna",
+                  "value" : 1533633170
+               },
+               "departure_time" : {
+                  "text" : "10:27am",
+                  "time_zone" : "Europe/Vienna",
+                  "value" : 1533630454
+               },
+               "distance" : {
+                  "text" : "11.9 km",
+                  "value" : 11937
+               },
+               "duration" : {
+                  "text" : "45 mins",
+                  "value" : 2716
+               },
+               "end_address" : "Schönbrunn Zoo, Maxingstraße 13b, 1130 Wien, Austria",
+               "end_location" : {
+                  "lat" : 48.1818657,
+                  "lng" : 16.3093997
+               },
+               "start_address" : "Welthandelsplatz 1 1, 1020 Wien, Austria",
+               "start_location" : {
+                  "lat" : 48.2148858,
+                  "lng" : 16.4059318
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "0.4 km",
+                        "value" : 431
+                     },
+                     "duration" : {
+                        "text" : "5 mins",
+                        "value" : 325
+                     },
+                     "end_location" : {
+                        "lat" : 48.2177167,
+                        "lng" : 16.4038928
+                     },
+                     "html_instructions" : "Walk to Messe-Prater",
+                     "polyline" : {
+                        "points" : "a~geHahccBE?C?C?E@E@E?E@EBCBEBCDEHQ`@Q`@Yl@MOUQGEECCAECEACAEAE?EAC?E?G?OBOD[LYPc@VGDc@XMTCDIN_@r@OVQXEJO^o@~ACk@?U"
+                     },
+                     "start_location" : {
+                        "lat" : 48.2148858,
+                        "lng" : 16.4059318
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "0.1 km",
+                              "value" : 95
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 67
+                           },
+                           "end_location" : {
+                              "lat" : 48.2155156,
+                              "lng" : 16.4051851
+                           },
+                           "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eWelthandelsplatz 1\u003c/b\u003e toward \u003cb\u003eNordportalstraße\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "a~geHahccBE?C?C?E@E@E?E@EBCBEBCDEHQ`@Q`@Yl@"
+                           },
+                           "start_location" : {
+                              "lat" : 48.2148858,
+                              "lng" : 16.4059318
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "0.3 km",
+                              "value" : 306
+                           },
+                           "duration" : {
+                              "text" : "4 mins",
+                              "value" : 234
+                           },
+                           "end_location" : {
+                              "lat" : 48.2176993,
+                              "lng" : 16.4035644
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eNordportalstraße\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "_bheHmcccBMOUQGEECCAECEACAEAE?EAC?E?G?OBOD[LYPc@VGDc@XMTCDIN_@r@OVQXEJO^o@~A"
+                           },
+                           "start_location" : {
+                              "lat" : 48.2155156,
+                              "lng" : 16.4051851
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "30 m",
+                              "value" : 30
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 24
+                           },
+                           "end_location" : {
+                              "lat" : 48.2177167,
+                              "lng" : 16.4038928
+                           },
+                           "html_instructions" : "Sharp \u003cb\u003eright\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the left\u003c/div\u003e",
+                           "maneuver" : "turn-sharp-right",
+                           "polyline" : {
+                              "points" : "soheHgybcBCk@?U"
+                           },
+                           "start_location" : {
+                              "lat" : 48.2176993,
+                              "lng" : 16.4035644
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.5 km",
+                        "value" : 2481
+                     },
+                     "duration" : {
+                        "text" : "5 mins",
+                        "value" : 300
+                     },
+                     "end_location" : {
+                        "lat" : 48.217113,
+                        "lng" : 16.37128
+                     },
+                     "html_instructions" : "Subway towards Wien Karlsplatz",
+                     "polyline" : {
+                        "points" : "cpheHi{bcBChFSv[I`DMfCWzCaBnNm@nFABWvDUzEWzGa@|GSdCIbCK~FBfBDxBJlBf@fFP~A^pChAdJv@rGj@jEhDzY`@lDFC"
+                     },
+                     "start_location" : {
+                        "lat" : 48.2177835,
+                        "lng" : 16.4038932
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 48.217113,
+                              "lng" : 16.37128
+                           },
+                           "name" : "Schottenring"
+                        },
+                        "arrival_time" : {
+                           "text" : "10:38am",
+                           "time_zone" : "Europe/Vienna",
+                           "value" : 1533631080
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 48.2177835,
+                              "lng" : 16.4038932
+                           },
+                           "name" : "Messe-Prater"
+                        },
+                        "departure_time" : {
+                           "text" : "10:33am",
+                           "time_zone" : "Europe/Vienna",
+                           "value" : 1533630780
+                        },
+                        "headsign" : "Wien Karlsplatz",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "Wiener Linien",
+                                 "phone" : "011 43 1 79090",
+                                 "url" : "https://www.wienerlinien.at/"
+                              }
+                           ],
+                           "color" : "#a862a4",
+                           "name" : "Seestadt - Karlsplatz",
+                           "short_name" : "U2",
+                           "text_color" : "#ffffff",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/subway2.png",
+                              "local_icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/de-metro.png",
+                              "name" : "Subway",
+                              "type" : "SUBWAY"
+                           }
+                        },
+                        "num_stops" : 3
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "7.8 km",
+                        "value" : 7833
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 900
+                     },
+                     "end_location" : {
+                        "lat" : 48.1858325,
+                        "lng" : 16.3197625
+                     },
+                     "html_instructions" : "Subway towards Wien Hütteldorf",
+                     "polyline" : {
+                        "points" : "}kheHoo|bBGOhB{BhD{DfA_AdA{@jC}AdAy@|@y@z@aAjAaBbAeBf@gAf@yAr@oCTuAJo@?A`@}CTmDR_GFyAJiAj@{Cf@yBb@eA`@k@b@e@jEaCrE_Cl@Gh@@j@Hd@PtBhAzCbBLFx@b@`F`Dz@t@l@x@^~@XhA^pCRpA^lAjBlDNVx@xAXj@h@~@n@t@jFbGj@z@`@bA\\jApAbIP`BDnACtAMlAkAlIq@fGk@hFCpALxATrAd@tAbAvB`AnBhK~Ub@rA\\zAZbB~@~H`@jDt@lGXbB\\rAb@dAj@`Al@x@p@j@t@\\x@LbA?tFa@x@HLBTFt@Pd@N\\Np@^t@f@x@r@zB~Bx@jAn@jAd@nAXpAVhBx@dI`AbKl@hHZxDDtAPrGJjD?DLpDLtBPfBTxA^|Ab@lAf@dAh@x@t@bA`KvNt@pA`AdBP^j@pA|@jD^rCNzBB`B?hO@rAAv@?j@GnAObBWfBiBrJoF`Wg@rC"
+                     },
+                     "start_location" : {
+                        "lat" : 48.217113,
+                        "lng" : 16.37128
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 48.1858325,
+                              "lng" : 16.3197625
+                           },
+                           "name" : "Schönbrunn"
+                        },
+                        "arrival_time" : {
+                           "text" : "10:58am",
+                           "time_zone" : "Europe/Vienna",
+                           "value" : 1533632280
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 48.217113,
+                              "lng" : 16.37128
+                           },
+                           "name" : "Schottenring"
+                        },
+                        "departure_time" : {
+                           "text" : "10:43am",
+                           "time_zone" : "Europe/Vienna",
+                           "value" : 1533631380
+                        },
+                        "headsign" : "Wien Hütteldorf",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "Wiener Linien",
+                                 "phone" : "011 43 1 79090",
+                                 "url" : "https://www.wienerlinien.at/"
+                              }
+                           ],
+                           "name" : "Hütteldorf - Spittelau Sperre Heiligenstadt vom 2.7. bis 26.8.2018",
+                           "short_name" : "U4",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/subway2.png",
+                              "local_icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/de-metro.png",
+                              "name" : "Subway",
+                              "type" : "SUBWAY"
+                           }
+                        },
+                        "num_stops" : 10
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.2 km",
+                        "value" : 1192
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 889
+                     },
+                     "end_location" : {
+                        "lat" : 48.1818657,
+                        "lng" : 16.3093997
+                     },
+                     "html_instructions" : "Walk to Schönbrunn Zoo, Maxingstraße 13b, 1130 Wien, Austria",
+                     "polyline" : {
+                        "points" : "{gbeHemrbBWtAo@jDALCL?J?B@F@BBDDFDFFD^VdAn@NHDBB@BB@@@??@?@?B?@?BABAFAFSt@x@Zj@X?B?@?@?@?@?@?@?@?@@??@?@@??@@@?@@??@@?@@UpAFZ?@?Bj@TOfA`@N@IPJFBN?D@~Ax@LFpAl@LFVNPLCPCR|@`@FBx@XAH@J@JBH@DDFDDFDD@B?B?@?D?BA\\nCPrANAJ@FDHL@DHP?HAN\\@?F?JCPKTCFv@\\LFAXDRCRGTGRCLCJM`@GTETCLGVIf@EZC\\C\\Eb@C`@Cd@A@"
+                     },
+                     "start_location" : {
+                        "lat" : 48.1857446,
+                        "lng" : 16.3197085
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "0.3 km",
+                              "value" : 261
+                           },
+                           "duration" : {
+                              "text" : "3 mins",
+                              "value" : 202
+                           },
+                           "end_location" : {
+                              "lat" : 48.1854387,
+                              "lng" : 16.3170892
+                           },
+                           "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e toward \u003cb\u003eSchönbrunner Schloßstraße\u003c/b\u003e/\u003cb\u003eB1\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "{gbeHemrbBWtAo@jDALCL?J?B@F@BBDDFDFFD^VdAn@NHDBB@BB@@@??@?@?B?@?BABAFAFSt@"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1857446,
+                              "lng" : 16.3197085
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "60 m",
+                              "value" : 60
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 43
+                           },
+                           "end_location" : {
+                              "lat" : 48.184932,
+                              "lng" : 16.316816
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "_fbeHy|qbBx@Zj@X"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1854387,
+                              "lng" : 16.3170892
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "15 m",
+                              "value" : 15
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 11
+                           },
+                           "end_location" : {
+                              "lat" : 48.18487289999999,
+                              "lng" : 16.3166542
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "ybbeHc{qbB?B?@?@?@?@?@?@?@?@@??@?@@??@@@?@@??@@?@@"
+                           },
+                           "start_location" : {
+                              "lat" : 48.184932,
+                              "lng" : 16.316816
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "46 m",
+                              "value" : 46
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 35
+                           },
+                           "end_location" : {
+                              "lat" : 48.1849357,
+                              "lng" : 16.3160746
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "mbbeHazqbBUpAFZ?@?B"
+                           },
+                           "start_location" : {
+                              "lat" : 48.18487289999999,
+                              "lng" : 16.3166542
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "26 m",
+                              "value" : 26
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 18
+                           },
+                           "end_location" : {
+                              "lat" : 48.1847158,
+                              "lng" : 16.3159611
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "{bbeHmvqbBj@T"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1849357,
+                              "lng" : 16.3160746
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "28 m",
+                              "value" : 28
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 21
+                           },
+                           "end_location" : {
+                              "lat" : 48.18480270000001,
+                              "lng" : 16.3156033
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "oabeHwuqbBOfA"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1847158,
+                              "lng" : 16.3159611
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "20 m",
+                              "value" : 20
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 15
+                           },
+                           "end_location" : {
+                              "lat" : 48.1846328,
+                              "lng" : 16.3155238
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "_bbeHosqbB`@N"
+                           },
+                           "start_location" : {
+                              "lat" : 48.18480270000001,
+                              "lng" : 16.3156033
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "3 m",
+                              "value" : 3
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 3
+                           },
+                           "end_location" : {
+                              "lat" : 48.1846225,
+                              "lng" : 16.3155668
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eMeidlinger Fahrstraße\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "}`beH_sqbB@I"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1846328,
+                              "lng" : 16.3155238
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "0.2 km",
+                              "value" : 177
+                           },
+                           "duration" : {
+                              "text" : "2 mins",
+                              "value" : 141
+                           },
+                           "end_location" : {
+                              "lat" : 48.1831381,
+                              "lng" : 16.3147289
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eFinstere Allee\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eTake the stairs\u003c/div\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "{`beHisqbBPJFBN?D@~Ax@LFpAl@LFVNPL"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1846225,
+                              "lng" : 16.3155668
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "15 m",
+                              "value" : 15
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 9
+                           },
+                           "end_location" : {
+                              "lat" : 48.1831831,
+                              "lng" : 16.314544
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eFinstere Allee\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "swaeHanqbBCPCR"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1831381,
+                              "lng" : 16.3147289
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "75 m",
+                              "value" : 75
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 52
+                           },
+                           "end_location" : {
+                              "lat" : 48.1825435,
+                              "lng" : 16.3142238
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eTaubenhausallee\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "{waeH{lqbB|@`@FBx@X"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1831831,
+                              "lng" : 16.314544
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "48 m",
+                              "value" : 48
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 34
+                           },
+                           "end_location" : {
+                              "lat" : 48.1822712,
+                              "lng" : 16.3138737
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eTaubenhausallee\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "{saeH{jqbBAH@J@JBH@DDFDDFDD@B?B?@?D?BA"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1825435,
+                              "lng" : 16.3142238
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "89 m",
+                              "value" : 89
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 67
+                           },
+                           "end_location" : {
+                              "lat" : 48.1820287,
+                              "lng" : 16.3127272
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eTaubenhausallee\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "eraeHuhqbB\\nCPrA"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1822712,
+                              "lng" : 16.3138737
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "49 m",
+                              "value" : 49
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 33
+                           },
+                           "end_location" : {
+                              "lat" : 48.18174740000001,
+                              "lng" : 16.3123789
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eRustenallee\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "upaeHqaqbBNAJ@FDHL@DHP?HAN"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1820287,
+                              "lng" : 16.3127272
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "16 m",
+                              "value" : 16
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 12
+                           },
+                           "end_location" : {
+                              "lat" : 48.1815998,
+                              "lng" : 16.312368
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eRustenallee\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "}naeHk_qbB\\@"
+                           },
+                           "start_location" : {
+                              "lat" : 48.18174740000001,
+                              "lng" : 16.3123789
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "29 m",
+                              "value" : 29
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 22
+                           },
+                           "end_location" : {
+                              "lat" : 48.1817011,
+                              "lng" : 16.3120266
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eRustenallee\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "_naeHi_qbB?F?JCPKTCF"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1815998,
+                              "lng" : 16.312368
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "41 m",
+                              "value" : 41
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 30
+                           },
+                           "end_location" : {
+                              "lat" : 48.18135239999999,
+                              "lng" : 16.3118436
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eRustenallee\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : {
+                              "points" : "snaeHe}pbBv@\\LF"
+                           },
+                           "start_location" : {
+                              "lat" : 48.1817011,
+                              "lng" : 16.3120266
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "0.2 km",
+                              "value" : 194
+                           },
+                           "duration" : {
+                              "text" : "2 mins",
+                              "value" : 141
+                           },
+                           "end_location" : {
+                              "lat" : 48.1818657,
+                              "lng" : 16.3093997
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eRustenallee\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : {
+                              "points" : "mlaeH_|pbBAXDRCRGTGRCLCJM`@GTETCLGVIf@EZC\\C\\Eb@C`@Cd@A@"
+                           },
+                           "start_location" : {
+                              "lat" : 48.18135239999999,
+                              "lng" : 16.3118436
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "a~geHahccBS@WFSVc@bAYl@MO]WIEUIUAWBk@RiBhA{@~Aw@|Ao@~ACk@?UK?ChFSv[I`DMfCWzCoC~UYzDm@vNu@bLIbCK~FH`FJlBf@fFp@pF`CxRtEf`@`@lDFCGOhB{BhD{DfA_AdA{@jC}AbCsBz@aAjAaBbAeBf@gAf@yAr@oC`@eC`@_DTmDR_GFyAJiAj@{Cf@yBb@eA`@k@b@e@jEaCrE_Cl@Gh@@j@Hd@PtBhAhDjBx@b@`F`Dz@t@l@x@^~@XhAr@bF^lAjBlDhApBbAjBzGxHj@z@`@bA\\jApAbIP`BDnACtAMlAkAlIq@fGk@hFCpALxATrAd@tAbAvB`AnBhK~Ub@rA\\zAZbB~@~HvAxLXbB\\rAb@dAj@`Al@x@p@j@t@\\x@LbA?tFa@fALnCx@fBfAx@r@zB~Bx@jAn@jAd@nAXpAVhBx@dInBlTZxDDtA\\~LLvD^|ETxA^|Ab@lAf@dA~A|B`KvNt@pArAdCj@pA|@jD^rCNzBB`B?hO?jCGzBg@jEiBrJoF`Wg@rCPHWtAq@xDCXFTJNf@\\~A~@FF?JYhAdBt@?B?B?B@HBDDDUpAFZ?@j@XOfA`@N@IPJVBrBbA~At@h@\\Gd@dAd@x@XAHBVDNJLTFF?BA\\nCPrANAJ@FDJRHZAN\\@?ROf@CFv@\\LFAXDRCROh@GX_@zA[xBSjC"
+         },
+         "summary" : "",
+         "warnings" : [
+            "Walking directions are in beta.    Use caution – This route may be missing sidewalks or pedestrian paths."
+         ],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}

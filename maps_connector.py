@@ -85,6 +85,8 @@ class TripPlanner(object):
                 estimated_duration = response[0]['legs'][0]['duration']['value']
                 # calculate arrival time
                 estimated_arrival = now + estimated_duration
+                # format arrival time
+                estimated_arrival = time.strftime("%H:%M", time.localtime(estimated_arrival))
 
             self.estimate = (mode, estimated_arrival, now)
 
