@@ -78,7 +78,7 @@ class TripPlanner(object):
             now = time.time()
             
             # save estimate
-            if mode == 'transit'
+            if mode == 'transit':
                 estimated_arrival = response[0]['legs'][0]['arrival_time']['text']
             else:
                 # estimated trip duration: number of seconds
