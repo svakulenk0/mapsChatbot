@@ -45,10 +45,10 @@ async def finish(opsdroid, config, message):
     '''
     error = tp.check_estimate()
     if error > 0:
-        minutes = int(d) / 60 % 60
+        minutes = int(error) / 60 % 60
         await message.respond("You are %s minutes late" % minutes)
     if error < 0:
-        minutes = int(-d) / 60 % 60
+        minutes = int(-error) / 60 % 60
         await message.respond("You are %s minutes early" % minutes)
     else:
         await message.respond("You are just on time!")
