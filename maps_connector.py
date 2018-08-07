@@ -79,7 +79,7 @@ class TripPlanner(object):
             
             # save estimate
             if mode == 'transit':
-                estimated_arrival = response[0]['legs'][0]['arrival_time']['text']
+                estimated_arrival = response[0]['legs'][0]['arrival_time']['value']
             else:
                 # estimated trip duration: number of seconds
                 estimated_duration = response[0]['legs'][0]['duration']['value']
