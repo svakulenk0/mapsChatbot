@@ -20,23 +20,20 @@ async def start(opsdroid, config, message):
 
 @match_regex(r'car|auto', case_sensitive=False)
 async def choose_car(opsdroid, config, message):
-    mode = 'driving'
-    estimate = tp.record_estimate(mode)
-    await message.respond("You are going with a car arriving in %s" % estimate)
+    estimate = tp.record_estimate('driving')
+    await message.respond("You are going with a car arriving at %s" % estimate)
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
-    mode = 'transit'
-    estimate = tp.record_estimate(mode)
-    await message.respond("You are going with a public transport arriving in %s" % estimate)
+    estimate = tp.record_estimate('transit')
+    await message.respond("You are going with a public transport arriving at %s" % estimate)
 
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
-    mode = 'bicycling'
-    estimate = tp.record_estimate(mode)
-    await message.respond("You are going by bike arriving in %s" % estimate)
+    estimate = tp.record_estimate('bicycling')
+    await message.respond("You are going by bike arriving at %s" % estimate)
 
 
 # @match_regex(r'check|check in|ready|finish|fin|ok', case_sensitive=False)

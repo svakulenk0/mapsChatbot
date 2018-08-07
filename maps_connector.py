@@ -11,10 +11,15 @@ Connects to Google Maps API via the offcial Python library
 
 https://github.com/googlemaps/google-maps-services-python
 
+Test API call: https://maps.googleapis.com/maps/api/directions/json?origin=WU+Wien&destination=Zoo+Schoenbrunn&mode=transit&key=x
+Test API call: https://maps.googleapis.com/maps/api/directions/json?origin=WU+Wien&destination=Zoo+Schoenbrunn&mode=driving&key=x
+Test API call: https://maps.googleapis.com/maps/api/directions/json?origin=WU+Wien&destination=Zoo+Schoenbrunn&mode=bicycling&key=x
+
 '''
-import googlemaps
-from datetime import datetime
+import time
 from heapq import heappush, heappop
+
+import googlemaps
 
 from .settings import API_KEY
 
@@ -27,11 +32,9 @@ gmaps = googlemaps.Client(key=API_KEY)
 
 def get_route(origin, destination, mode):
     # Request directions via public transit
-    now = datetime.now()
     directions_result = gmaps.directions(origin,
                                          destination,
                                          mode=mode)
-                                         # departure_time=now)
     return directions_result
 
 
@@ -71,11 +74,21 @@ class TripPlanner(object):
     def record_estimate(self, mode):
         response = get_route(self.origin, self.destination, mode)
         if response:
+            
+            now = time.time()
+            
             # save estimate
-            estimate = response[0]['legs'][0]['duration']
-            now = datetime.now()
-            self.choice = (mode, estimate, now)
-            return estimate
+            if mode == 'transit'
+                estimated_arrival = response[0]['legs'][0]['arrival_time']['text']
+            else:
+                # estimated trip duration: number of seconds
+                estimated_duration = response[0]['legs'][0]['duration']['value']
+                # calculate arrival time
+                estimated_arrival = now + estimated_duration
+
+            self.estimate = (mode, estimated_arrival, now)
+
+            return estimated_arrival
 
 
 def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):
