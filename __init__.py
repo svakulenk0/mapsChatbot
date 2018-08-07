@@ -47,7 +47,7 @@ async def finish(opsdroid, config, message):
     if error > 0:
         minutes = int(error) / 60 % 60
         await message.respond("You are %d minutes late" % minutes)
-    if error < 0:
+    elif error < 0:
         minutes = int(-error) / 60 % 60
         await message.respond("You are %d minutes early" % minutes)
     else:
