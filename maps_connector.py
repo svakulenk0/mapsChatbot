@@ -85,12 +85,16 @@ class TripPlanner(object):
                 estimated_duration = response[0]['legs'][0]['duration']['value']
                 # calculate arrival time
                 estimated_arrival = now + estimated_duration
-                # format arrival time
-                estimated_arrival = time.strftime("%H:%M", time.localtime(estimated_arrival))
 
             self.estimate = (mode, estimated_arrival, now)
+            
+            # format arrival time
+            return time.strftime("%H:%M", time.localtime(estimated_arrival))
 
-            return estimated_arrival
+    def check_estimate(self):
+        now = time.time()
+        error = now - self.estimate[1]
+        return error
 
 
 def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):

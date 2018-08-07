@@ -6,9 +6,11 @@ from .maps_connector import TripPlanner
 
 tp = TripPlanner()
 
-# @match_always()
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
 async def start(opsdroid, config, message):
+    '''
+    sample request: From tu wien to Schönbrunn
+    '''
     origin = message.regex.group(1)
     destination = message.regex.group(2)
     text = tp.rank_alternative_routes(origin, destination)
@@ -36,6 +38,15 @@ async def choose_bike(opsdroid, config, message):
     await message.respond("You are going by bike arriving at %s" % estimate)
 
 
-# @match_regex(r'check|check in|ready|finish|fin|ok', case_sensitive=False)
-#     async def finish(opsdroid, config, message):
-#         await message.respond(text)
+@match_regex(r'check|check in|ready|finish|fin|ok|here', case_sensitive=False)
+async def finish(opsdroid, config, message):
+    '''
+    calculates difference between the estimated and actual arrival time
+    '''
+    error = tp.check_estimate()
+    if error > 0:
+        await message.respond("You are %s late" % error)
+    if error < 0:
+        await message.respond("You are %s early" % error)
+    else:
+        await message.respond("You are just on time!")
