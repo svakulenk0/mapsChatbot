@@ -1,5 +1,3 @@
-import datetime
-
 from opsdroid.matchers import match_regex
 import logging
 import random

@@ -73,7 +73,7 @@ class TripPlanner(object):
         if response:
             # save estimate
             estimate = response[0]['legs'][0]['duration']
-            now = datetime.datetime.now()
+            now = datetime.now()
             self.choice = (mode, estimate, now)
             return estimate
 
