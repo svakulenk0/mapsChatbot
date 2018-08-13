@@ -51,16 +51,13 @@ class TripPlanner(object):
         self.timestamp = None
         self.error = None
 
-    def rank_alternative_routes(self, origin, destination):
+    def rank_alternative_routes(self):
         '''
         Collects Google Maps routes API results for different transport options
         '''
-        # restart estimates for the new route
-        self.__init__(origin, destination)
-
         estimates = []
         for mode, transport in MODES.items():
-            response = get_route(origin, destination, mode)
+            response = get_route(self.origin, self.destination, mode)
             if response:
                 estimate = response[0]['legs'][0]['duration']
                 # rank estimates
