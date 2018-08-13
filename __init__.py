@@ -34,14 +34,15 @@ async def start(opsdroid, config, message):
     # load error estimate from the previous history
     previous_error = await opsdroid.memory.get(AGENT_ID)
     if previous_error:
+        text += "\n\nLast time you were "
         if previous_error > 0:
             minutes = int(previous_error) / 60 % 60
-            text += "\nLast time you were %d minutes late" % minutes
+            text += "%d minutes late" % minutes
         elif previous_error < 0:
             minutes = int(-previous_error) / 60 % 60
-            text += "\nLast time you were %d minutes early" % minutes
+            text += "%d minutes early" % minutes
         else:
-            text += "\nLast time you were just on time!"
+            text += "just on time!"
 
     # respond
     if text:
