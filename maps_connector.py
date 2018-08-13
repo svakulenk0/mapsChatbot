@@ -90,7 +90,7 @@ class TripPlanner(object):
                 estimated_arrival = now + estimated_duration
 
             self.estimate = (mode, estimated_arrival, now)
-            self.mode = mode
+            self.mode = transport
             # format arrival time
             return time.strftime("%H:%M", time.localtime(estimated_arrival))
 
