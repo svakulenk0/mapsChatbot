@@ -12,8 +12,6 @@ INSTRUCTION = '1) Define the route, e.g. "from karlsplatz to rathausplatz"\n2) C
 
 def setup(opsdroid):
     opsdroid.tp = TripPlanner()
-    # load error estimate from the previous history
-    opsdroid.previous_error = await opsdroid.memory.get(AGENT_ID)
 
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
@@ -25,6 +23,9 @@ async def start(opsdroid, config, message):
     destination = message.regex.group(2)
     # restart estimates for the new route
     opsdroid.tp = TripPlanner(origin, destination)
+    
+    # load error estimate from the previous history
+    opsdroid.previous_error = await opsdroid.memory.get(AGENT_ID)
 
     text = opsdroid.tp.rank_alternative_routes()
     if text:
