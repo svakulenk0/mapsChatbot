@@ -1,4 +1,4 @@
-from opsdroid.matchers import match_regex
+from opsdroid.matchers import match_regex, match_always
 import logging
 import random
 
