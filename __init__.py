@@ -14,7 +14,7 @@ def setup(opsdroid):
     opsdroid.tp = TripPlanner()
 
 
-def estimate(mode):
+def estimate(opsdroid, mode):
     estimate = opsdroid.tp.record_estimate(mode)
     response = "You are going by %s estimated arrival time %s" % (mode, estimate)
     if opsdroid.previous_error:
