@@ -25,7 +25,7 @@ async def start(opsdroid, config, message):
     # restart estimates for the new route
     opsdroid.tp = TripPlanner(origin, destination)
 
-    text = opsdroid.tp.rank_alternative_routes(origin, destination)
+    text = opsdroid.tp.rank_alternative_routes()
     if text:
         await message.respond(text)
     else:
