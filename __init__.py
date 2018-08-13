@@ -6,6 +6,7 @@ from .maps_connector import TripPlanner
 
 tp = TripPlanner()
 
+
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
 async def start(opsdroid, config, message):
     '''
@@ -52,3 +53,8 @@ async def finish(opsdroid, config, message):
         await message.respond("You are %d minutes early" % minutes)
     else:
         await message.respond("You are just on time!")
+
+
+@match_always()
+async def unknown_command(opsdroid, config, message):
+    await message.respond('1) Define the route, e.g. "from karlsplatz to rathausplatz"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination')
