@@ -41,17 +41,22 @@ def get_route(origin, destination, mode):
 class TripPlanner(object):
     """Each object of the class holds information about the planned trip"""
 
-    def __init__(self):
-        self.origin = None
-        self.destination = None
-        self.choice = None
+    def __init__(self, origin=None, destination=None):
+        # plan route details
+        self.origin = origin
+        self.destination = destination
+        # make transport choice
+        self.mode = None
+        # record observation
+        self.timestamp = None
+        self.error = None
 
     def rank_alternative_routes(self, origin, destination):
         '''
         Collects Google Maps routes API results for different transport options
         '''
-        self.origin = origin
-        self.destination = destination
+        # restart estimates for the new route
+        self.__init__(origin, destination)
 
         estimates = []
         for mode, transport in MODES.items():
@@ -87,14 +92,14 @@ class TripPlanner(object):
                 estimated_arrival = now + estimated_duration
 
             self.estimate = (mode, estimated_arrival, now)
-            
+            self.mode = mode
             # format arrival time
             return time.strftime("%H:%M", time.localtime(estimated_arrival))
 
     def check_estimate(self):
-        now = time.time()
-        error = now - self.estimate[1]
-        return error
+        self.timestamp = time.time()
+        self.error = self.timestamp - self.estimate[1]
+        return self.error
 
 
 def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):

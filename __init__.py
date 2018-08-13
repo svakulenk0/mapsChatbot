@@ -1,4 +1,5 @@
 from opsdroid.matchers import match_regex, match_always
+import DatabaseMongo
 import logging
 import random
 
@@ -7,8 +8,9 @@ from .maps_connector import TripPlanner
 
 INSTRUCTION = '1) Define the route, e.g. "from karlsplatz to rathausplatz"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination'
 
+# connect to the DB
+db = DatabaseMongo()
 tp = TripPlanner()
-match = False
 
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
@@ -16,7 +18,6 @@ async def start(opsdroid, config, message):
     '''
     sample request: From tu wien to Schönbrunn
     '''
-    match = True
     origin = message.regex.group(1)
     destination = message.regex.group(2)
     text = tp.rank_alternative_routes(origin, destination)
@@ -62,6 +63,17 @@ async def finish(opsdroid, config, message):
         await message.respond("You are %d minutes early" % minutes)
     else:
         await message.respond("You are just on time!")
+
+
+@match_regex(r'save|speichern', case_sensitive=False)
+async def save_to_DB(opsdroid, config, message):
+    '''
+    save the user_id, route details (origin/destination/transport) and error to DB, e.g. through the mongo connector
+    '''
+    if tp.error:
+        key = 'google_maps'  # user_id
+        api_error = (tp.origin, tp.destination, tp.mode, tp.timestamp, tp.error)
+        db.put(key, api_error)
 
 
 @match_regex(r'help', case_sensitive=False)
