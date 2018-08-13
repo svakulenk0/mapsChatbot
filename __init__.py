@@ -32,17 +32,18 @@ async def start(opsdroid, config, message):
     text = opsdroid.tp.rank_alternative_routes()
 
     # load error estimate from the previous history
-    previous_error, mode = await opsdroid.memory.get(AGENT_ID)
+    previous_error = await opsdroid.memory.get(AGENT_ID)
     if previous_error:
-        if previous_error > 0:
-            minutes = int(previous_error) / 60 % 60
+        error, transport = previous_error
+        if error > 0:
+            minutes = int(error) / 60 % 60
             previous_error_text = "%d minutes late" % minutes
-        elif previous_error < 0:
-            minutes = int(-previous_error) / 60 % 60
+        elif error < 0:
+            minutes = int(-error) / 60 % 60
             previous_error_text = "%d minutes early" % minutes
         else:
             previous_error_text = "just on time"
-        text += "\n\nLast time you were %s with the %s" % (previous_error_text, mode)
+        text += "\n\nLast time you were %s with the %s" % (previous_error_text, transport)
 
     # respond
     if text:
