@@ -5,8 +5,8 @@ import random
 
 from .maps_connector import TripPlanner
 
-AGENT_ID = 'google_maps'
-INSTRUCTION = '1) Define the route, e.g. "from zoo schoenbrunn to wu wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination'
+AGENT_ID = 'Google Maps API'
+INSTRUCTION = '1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -17,8 +17,6 @@ def setup(opsdroid):
 def estimate(opsdroid, mode):
     estimate = opsdroid.tp.record_estimate(mode)
     response = "You are going by %s estimated arrival time %s" % (mode, estimate)
-    if opsdroid.previous_error:
-        response += "\nLast time the error was %s" % opsdroid.previous_error
     return response
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
@@ -31,10 +29,21 @@ async def start(opsdroid, config, message):
     # restart estimates for the new route
     opsdroid.tp = TripPlanner(origin, destination)
 
-    # load error estimate from the previous history
-    opsdroid.previous_error = await opsdroid.memory.get(AGENT_ID)
+    text = opsdroid.tp.rank_alternative_routes(error_history)
 
-    text = opsdroid.tp.rank_alternative_routes()
+    # load error estimate from the previous history
+    previous_error = await opsdroid.memory.get(AGENT_ID)
+    if previous_error:
+        if error > 0:
+            minutes = int(error) / 60 % 60
+            text += "\nLast time you were %d minutes late" % minutes
+        elif error < 0:
+            minutes = int(-error) / 60 % 60
+            text += "\nLast time you were %d minutes early" % minutes
+        else:
+            text += "\nLast time you were just on time!"
+
+    # respond
     if text:
         await message.respond(text)
     else:
@@ -75,7 +84,7 @@ async def finish(opsdroid, config, message):
         await message.respond("You are just on time!")
 
 
-@match_regex(r'save|speichern', case_sensitive=False)
+@match_regex(r'save|speichern|record|persist', case_sensitive=False)
 async def save_to_DB(opsdroid, config, message):
     '''
     save the user_id, route details (origin/destination/transport) and error to DB, e.g. through the mongo connector
@@ -85,7 +94,7 @@ async def save_to_DB(opsdroid, config, message):
         api_error = opsdroid.tp.error
         await opsdroid.memory.put(AGENT_ID, api_error)
         # db.put(key, api_error)
-        await message.respond("Saved " + opsdroid.tp.origin)
+        await message.respond("Saved error from %s route estimate for %s" % (opsdroid.tp.origin, AGENT_ID))
 
 
 @match_regex(r'help', case_sensitive=False)
