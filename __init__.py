@@ -14,13 +14,12 @@ def setup(opsdroid):
     opsdroid.tp = TripPlanner()
 
 
-def respond_with_estimate(mode):
+def estimate(mode):
     estimate = opsdroid.tp.record_estimate(mode)
     response = "You are going by %s estimated arrival time %s" % (mode, estimate)
     if opsdroid.previous_error:
         response += "\nLast time the error was %s" % opsdroid.previous_error
-    await message.respond(response)
-
+    return response
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
 async def start(opsdroid, config, message):
@@ -44,17 +43,20 @@ async def start(opsdroid, config, message):
 
 @match_regex(r'car|auto', case_sensitive=False)
 async def choose_car(opsdroid, config, message):
-    respond_with_estimate('car')
+    response = estimate('car')
+    await message.respond(response)
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
-    respond_with_estimate('public transport')
+    response = estimate('public transport')
+    await message.respond(response)
 
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
-    respond_with_estimate('bike')
+    response = estimate('bike')
+    await message.respond(response)
 
 
 @match_regex(r'check|check in|ready|finish|fin|ok|here', case_sensitive=False)
