@@ -23,7 +23,7 @@ import googlemaps
 
 from .settings import API_KEY
 
-MODES = {"driving": "car", "transit": "public transport", "bicycling": "bicycle"}
+MODES = {"car": "driving", "public transport": "transit", "bike" "bicycling"}
 
 
 # connect to Google Maps API
@@ -56,7 +56,7 @@ class TripPlanner(object):
         Collects Google Maps routes API results for different transport options
         '''
         estimates = []
-        for mode, transport in MODES.items():
+        for transport, mode in MODES.items():
             response = get_route(self.origin, self.destination, mode)
             if response:
                 estimate = response[0]['legs'][0]['duration']
@@ -73,7 +73,8 @@ class TripPlanner(object):
             route += "\n%s %s" % (transport, time_str)
         return route
 
-    def record_estimate(self, mode):
+    def record_estimate(self, transport):
+        mode = MODES[transport]
         response = get_route(self.origin, self.destination, mode)
         if response:
             # round up 1 minute

@@ -14,6 +14,14 @@ def setup(opsdroid):
     opsdroid.tp = TripPlanner()
 
 
+def respond_with_estimate(mode):
+    estimate = opsdroid.tp.record_estimate(mode)
+    response = "You are going by %s estimated arrival time %s" % (mode, estimate)
+    if opsdroid.previous_error:
+        response += "\nLast time the error was %s" % opsdroid.previous_error
+    await message.respond(response)
+
+
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
 async def start(opsdroid, config, message):
     '''
@@ -23,7 +31,7 @@ async def start(opsdroid, config, message):
     destination = message.regex.group(2)
     # restart estimates for the new route
     opsdroid.tp = TripPlanner(origin, destination)
-    
+
     # load error estimate from the previous history
     opsdroid.previous_error = await opsdroid.memory.get(AGENT_ID)
 
@@ -36,21 +44,17 @@ async def start(opsdroid, config, message):
 
 @match_regex(r'car|auto', case_sensitive=False)
 async def choose_car(opsdroid, config, message):
-    estimate = opsdroid.tp.record_estimate('driving')
-    
-    await message.respond("You are going with a car estimated arrival time %s\n Last time the error was %s" % (estimate,opsdroid.previous_error))
+    respond_with_estimate('car')
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
-    estimate = opsdroid.tp.record_estimate('transit')
-    await message.respond("You are going with a public transport estimated arrival time %s\n Last time the error was %s" % (estimate,opsdroid.previous_error))
+    respond_with_estimate('public transport')
 
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
-    estimate = opsdroid.tp.record_estimate('bicycling')
-    await message.respond("You are going by bike estimated arrival time %s\n Last time the error was %s" % (estimate,opsdroid.previous_error))
+    respond_with_estimate('bike')
 
 
 @match_regex(r'check|check in|ready|finish|fin|ok|here', case_sensitive=False)
