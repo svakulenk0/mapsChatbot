@@ -29,7 +29,7 @@ async def start(opsdroid, config, message):
     # restart estimates for the new route
     opsdroid.tp = TripPlanner(origin, destination)
 
-    text = opsdroid.tp.rank_alternative_routes(error_history)
+    text = opsdroid.tp.rank_alternative_routes()
 
     # load error estimate from the previous history
     previous_error = await opsdroid.memory.get(AGENT_ID)
