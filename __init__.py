@@ -77,6 +77,7 @@ async def save_to_DB(opsdroid, config, message):
         api_error = (opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.mode, opsdroid.tp.timestamp, opsdroid.tp.error)
         await opsdroid.memory.put(key, api_error)
         # db.put(key, api_error)
+        await message.respond("Saved" + opsdroid.tp.origin)
 
 
 @match_regex(r'help', case_sensitive=False)
