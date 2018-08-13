@@ -70,10 +70,10 @@ async def help(opsdroid, config, message):
     await message.respond(INSTRUCTION)
 
 
-@match_always()
-async def unknown_command(opsdroid, config, message):
-    '''
-    default response if the utterance did not match any of the regex commands defined above
-    '''
-    if not match:
-        await message.respond("Not sure what you mean!\n" + INSTRUCTION)
+# @match_always()
+# async def unknown_command(opsdroid, config, message):
+#     '''
+#     default response if the utterance did not match any of the regex commands defined above
+#     '''
+#     if not match:
+#         await message.respond("Not sure what you mean!\n" + INSTRUCTION)
