@@ -6,7 +6,7 @@ import random
 from .maps_connector import TripPlanner
 
 AGENT_ID = 'google_maps'
-INSTRUCTION = '1) Define the route, e.g. "from karlsplatz to rathausplatz"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination'
+INSTRUCTION = '1) Define the route, e.g. "from zoo schoenbrunn to wu wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -43,19 +43,19 @@ async def start(opsdroid, config, message):
 
 @match_regex(r'car|auto', case_sensitive=False)
 async def choose_car(opsdroid, config, message):
-    response = estimate('car')
+    response = estimate(opsdroid, 'car')
     await message.respond(response)
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
-    response = estimate('public transport')
+    response = estimate(opsdroid, 'public transport')
     await message.respond(response)
 
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
-    response = estimate('bike')
+    response = estimate(opsdroid, 'bike')
     await message.respond(response)
 
 
@@ -92,6 +92,15 @@ async def save_to_DB(opsdroid, config, message):
 async def help(opsdroid, config, message):
     match = True
     await message.respond(INSTRUCTION)
+
+
+# @match_regex(r'car|auto', case_sensitive=False)
+# async def choose_car(opsdroid, config, message):
+#     '''
+#     quick command to run all tests
+#     '''
+#     response = estimate(opsdroid, 'car')
+#     await message.respond(response)
 
 
 # @match_always()
