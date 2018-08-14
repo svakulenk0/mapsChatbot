@@ -6,7 +6,7 @@ import random
 from .maps_connector import TripPlanner
 
 AGENT_ID = 'Google Maps API'
-INSTRUCTION = '1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination\n4) Say "save" if you want to save the estimate'
+INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination\n4) Say "save" if you want to save the estimate'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -99,7 +99,7 @@ async def save_to_DB(opsdroid, config, message):
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 
 
-@match_regex(r'/satrt|start|help', case_sensitive=False)
+@match_regex(r'start|help', case_sensitive=False)
 async def help(opsdroid, config, message):
     match = True
     await message.respond(INSTRUCTION)
