@@ -99,7 +99,7 @@ async def save_to_DB(opsdroid, config, message):
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 
 
-@match_regex(r'help', case_sensitive=False)
+@match_regex(r'/satrt|start|help', case_sensitive=False)
 async def help(opsdroid, config, message):
     match = True
     await message.respond(INSTRUCTION)
