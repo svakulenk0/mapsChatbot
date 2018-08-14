@@ -6,7 +6,7 @@ import random
 from .maps_connector import TripPlanner
 
 AGENT_ID = 'Google Maps API'
-INSTRUCTION = '1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination'
+INSTRUCTION = '1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination\n4) Say "save" if you want to save the estimate'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -43,7 +43,7 @@ async def start(opsdroid, config, message):
             previous_error_text = "%d minutes early" % minutes
         else:
             previous_error_text = "just on time"
-        text += "\n\nLast time you were %s with the %s" % (previous_error_text, transport)
+        text += "\n\nLast time you were %s when travelling with the %s" % (previous_error_text, transport)
 
     # respond
     if text:
