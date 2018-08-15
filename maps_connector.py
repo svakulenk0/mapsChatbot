@@ -76,24 +76,26 @@ class TripPlanner(object):
 
     def record_estimate(self, transport):
         mode = MODES[transport]
-        response = get_route(self.origin, self.destination, mode)
-        if response:
-            # round up 1 minute
-            now = time.time() + 60
-            
-            # save estimate
-            if mode == 'transit':
-                estimated_arrival = response[0]['legs'][0]['arrival_time']['value']
-            else:
-                # estimated trip duration: number of seconds
-                estimated_duration = response[0]['legs'][0]['duration']['value']
-                # calculate arrival time
-                estimated_arrival = now + estimated_duration
+        if self.origin and self.destination:
+            response = get_route(self.origin, self.destination, mode)
+            if response:
+                # round up 1 minute
+                now = time.time() + 60
+                
+                # save estimate
+                if mode == 'transit':
+                    estimated_arrival = response[0]['legs'][0]['arrival_time']['value']
+                else:
+                    # estimated trip duration: number of seconds
+                    estimated_duration = response[0]['legs'][0]['duration']['value']
+                    # calculate arrival time
+                    estimated_arrival = now + estimated_duration
 
-            self.estimate = (mode, estimated_arrival, now)
-            self.mode = transport
-            # format arrival time
-            return time.strftime("%H:%M", time.localtime(estimated_arrival))
+                self.estimate = (mode, estimated_arrival, now)
+                self.mode = transport
+                # format arrival time
+                return time.strftime("%H:%M", time.localtime(estimated_arrival))
+        return None
 
     def check_estimate(self):
         if self.estimate:
