@@ -47,6 +47,7 @@ class TripPlanner(object):
         self.destination = destination
         # make transport choice
         self.mode = None
+        self.estimate = None
         # record observation
         self.timestamp = None
         self.error = None
