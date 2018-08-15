@@ -95,9 +95,11 @@ class TripPlanner(object):
             return time.strftime("%H:%M", time.localtime(estimated_arrival))
 
     def check_estimate(self):
-        self.timestamp = time.time()
-        self.error = self.timestamp - self.estimate[1]
-        return self.error
+        if self.estimate:
+            self.timestamp = time.time()
+            self.error = self.timestamp - self.estimate[1]
+            return self.error
+        return None
 
 
 def test_rank_alternative_routes(origin='WU Wien', destination='Zoo Schoenbrunn'):
