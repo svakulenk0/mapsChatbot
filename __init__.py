@@ -5,7 +5,7 @@ import random
 
 from .maps_connector import TripPlanner
 
-AGENT_ID = 'Google Maps API'
+AGENT_ID = 'googleMaps'
 INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination\n4) Say "save" if you want to save the results'
 # connect to the DB
 # db = DatabaseMongo()
