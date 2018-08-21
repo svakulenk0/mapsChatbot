@@ -5,6 +5,7 @@ import random
 
 from .maps_connector import TripPlanner
 
+# mongo collection name
 AGENT_ID = 'googleMaps'
 INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination\n4) Say "save" if you want to save the results'
 # connect to the DB
@@ -96,7 +97,7 @@ async def save_to_DB(opsdroid, config, message):
     '''
     if opsdroid.tp.error:
         # api_error = (opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.mode, opsdroid.tp.timestamp, opsdroid.tp.error)
-        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode}
+        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'user': message.user}
         await opsdroid.memory.put(AGENT_ID, estimate_error)
         # db.put(key, api_error)
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
