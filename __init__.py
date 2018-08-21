@@ -35,7 +35,7 @@ async def start(opsdroid, config, message):
     # load error estimate from the previous history
     previous_error = await opsdroid.memory.get(AGENT_ID)
     if previous_error:
-        error, transport = previous_error
+        error = previous_error['error']
         if error > 0:
             minutes = int(error) / 60 % 60
             previous_error_text = "%d minutes late" % minutes
@@ -44,7 +44,7 @@ async def start(opsdroid, config, message):
             previous_error_text = "%d minutes early" % minutes
         else:
             previous_error_text = "just on time"
-        text += "\n\nLast time you were %s when travelling with the %s" % (previous_error_text, transport)
+        text += "\n\nLast time you were %s when travelling with the %s" % (previous_error_text, previous_error['transport'])
 
     # respond
     if text:
@@ -96,7 +96,7 @@ async def save_to_DB(opsdroid, config, message):
     '''
     if opsdroid.tp.error:
         # api_error = (opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.mode, opsdroid.tp.timestamp, opsdroid.tp.error)
-        estimate_error = {'error': opsdroid.tp.error, 'mode': opsdroid.tp.mode}
+        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode}
         await opsdroid.memory.put(AGENT_ID, estimate_error)
         # db.put(key, api_error)
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
