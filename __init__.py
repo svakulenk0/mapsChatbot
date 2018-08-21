@@ -96,8 +96,8 @@ async def save_to_DB(opsdroid, config, message):
     '''
     if opsdroid.tp.error:
         # api_error = (opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.mode, opsdroid.tp.timestamp, opsdroid.tp.error)
-        api_error = (opsdroid.tp.error, opsdroid.tp.mode)
-        await opsdroid.memory.put(AGENT_ID, api_error)
+        estimate_error = {'error': opsdroid.tp.error, 'mode': opsdroid.tp.mode}
+        await opsdroid.memory.put(AGENT_ID, estimate_error)
         # db.put(key, api_error)
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 
