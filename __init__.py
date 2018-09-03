@@ -25,7 +25,7 @@ def estimate(opsdroid, mode=None):
 
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
-async def start(opsdroid, config, message):
+async def show_options(opsdroid, config, message):
     '''
     sample request: From tu wien to Schönbrunn
     '''
@@ -53,7 +53,7 @@ async def start(opsdroid, config, message):
 
     # respond
     if text:
-        await message.respond(text)
+        await message.respond(text+'\nChoose one of the transportation options.')
     else:
         await message.respond("Not sure what you mean. Could you be more specific?")
 
@@ -114,7 +114,7 @@ async def save_to_DB(opsdroid, config, message):
     save the user_id, route details (origin/destination/transport) and error to DB, e.g. through the mongo connector
     '''
     if opsdroid.tp.error:
-        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'agent': AGENT_ID,
+        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.transport, 'agent': AGENT_ID,
                           'origin': opsdroid.tp.origin, 'destination': opsdroid.tp.destination, 'timestamp': opsdroid.tp.timestamp}
         
         collected_errors = await opsdroid.memory.get(str(message.user))
