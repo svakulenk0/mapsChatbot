@@ -115,7 +115,8 @@ async def save_to_DB(opsdroid, config, message):
     save the user_id, route details (origin/destination/transport) and error to DB, e.g. through the mongo connector
     '''
     if opsdroid.tp.error:
-        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'agent': AGENT_ID, opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.timestamp}
+        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'agent': AGENT_ID,
+                          'origin': opsdroid.tp.origin, 'destination': opsdroid.tp.destination, 'timestamp': opsdroid.tp.timestamp}
         
         collected_errors = await opsdroid.memory.get(message.user)
         if collected_errors:
