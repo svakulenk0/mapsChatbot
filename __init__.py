@@ -37,9 +37,9 @@ async def show_options(opsdroid, config, message):
     text = opsdroid.tp.rank_alternative_routes()
 
     # load error estimate from the previous history by user id
-    collected_errors = await opsdroid.memory.get(AGENT_ID)
-    if collected_errors:
-        last_error = collected_errors[0]
+    last_error = await opsdroid.memory.get(AGENT_ID)
+    if last_error:
+        # last_error = collected_errors[0]
         error = last_error['error']
         if error > 0:
             minutes = int(error) / 60 % 60
