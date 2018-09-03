@@ -20,7 +20,7 @@ def estimate(opsdroid, mode=None):
         opsdroid.tp.choose_transport(mode)
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
-        response = 'You are going by %s estimated arrival time %s if you leave now. Say "start" when you leave later to correct the estimate.' % (mode, estimate)
+        response = 'You are going by %s estimated arrival time %s if you leave now. Say "start" when you leave.' % (mode, estimate)
         return response
 
 
@@ -80,7 +80,7 @@ async def choose_bike(opsdroid, config, message):
 
 @match_regex(r'start', case_sensitive=False)
 async def start_trip(opsdroid, config, message):
-    if opsdroid.tp.mode:
+    if opsdroid.tp.transport:
         # use previously chosen transport mode
         response = estimate(opsdroid)
         if response:
