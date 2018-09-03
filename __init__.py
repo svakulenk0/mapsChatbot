@@ -36,19 +36,21 @@ async def start(opsdroid, config, message):
 
     text = opsdroid.tp.rank_alternative_routes()
 
-    # load error estimate from the previous history
-    previous_error = await opsdroid.memory.get(AGENT_ID)
-    if previous_error:
-        error = previous_error['error']
+    # load error estimate from the previous history by user id
+    previous_errors = await opsdroid.memory.get(message.user)
+    last_error = previous_errors[0]
+
+    if last_error:
+        error = last_error['error']
         if error > 0:
             minutes = int(error) / 60 % 60
-            previous_error_text = "%d minutes late" % minutes
+            last_error_text = "%d minutes late" % minutes
         elif error < 0:
             minutes = int(-error) / 60 % 60
-            previous_error_text = "%d minutes early" % minutes
+            last_error_text = "%d minutes early" % minutes
         else:
-            previous_error_text = "just on time"
-        text += "\n\nLast time you were %s when travelling with the %s" % (previous_error_text, previous_error['transport'])
+            last_error_text = "just on time"
+        text += "\n\nLast time you were %s when travelling with the %s" % (last_error_text, last_error['transport'])
 
     # respond
     if text:
@@ -110,9 +112,15 @@ async def save_to_DB(opsdroid, config, message):
     save the user_id, route details (origin/destination/transport) and error to DB, e.g. through the mongo connector
     '''
     if opsdroid.tp.error:
-        # api_error = (opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.mode, opsdroid.tp.timestamp, opsdroid.tp.error)
-        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'user': message.user}
-        await opsdroid.memory.put(AGENT_ID, estimate_error)
+        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'agent': AGENT_ID, opsdroid.tp.origin, opsdroid.tp.destination, opsdroid.tp.timestamp}
+        
+        collected_errors = await opsdroid.memory.get(message.user)
+        if collected_errors:
+            collected_errors.append(estimate_error)
+        else:
+            collected_errors = [estimate_error]
+        
+        await opsdroid.memory.put(message.user, collected_errors)
         # db.put(key, api_error)
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 
