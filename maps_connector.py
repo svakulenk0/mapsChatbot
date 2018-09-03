@@ -68,11 +68,11 @@ class TripPlanner(object):
                 return None
 
         route = "From: %s" % response[0]['legs'][0]['start_address'].split(',')[0]
-        route += "\nTo: %s" % response[0]['legs'][0]['end_address'].split(',')[0]
+        route += "\nTo: %s\n" % response[0]['legs'][0]['end_address'].split(',')[0]
 
         while estimates:
             time, (transport, time_str) = heappop(estimates)
-            route += "\n%s %s\n" % (transport, time_str)
+            route += "\n%s %s" % (transport, time_str)
         return route
 
     def choose_transport(self, transport):
