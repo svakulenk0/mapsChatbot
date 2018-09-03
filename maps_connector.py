@@ -46,7 +46,8 @@ class TripPlanner(object):
         self.origin = origin
         self.destination = destination
         # make transport choice
-        self.mode = None
+        self.transport = None
+        # estimate prediction
         self.estimate = None
         # record observation
         self.timestamp = None
@@ -74,8 +75,11 @@ class TripPlanner(object):
             route += "\n%s %s" % (transport, time_str)
         return route
 
-    def record_estimate(self, transport):
-        mode = MODES[transport]
+    def choose_transport(self, transport):
+        self.transport = transport
+
+    def record_estimate(self):
+        mode = MODES[self.transport]
         if self.origin and self.destination:
             response = get_route(self.origin, self.destination, mode)
             if response:
@@ -92,10 +96,10 @@ class TripPlanner(object):
                     estimated_arrival = now + estimated_duration
 
                 self.estimate = (mode, estimated_arrival, now)
-                self.mode = transport
+                
                 # format arrival time
-                return time.strftime("%H:%M", time.localtime(estimated_arrival))
-        return None
+                return time.strftime("%H:%M", time.localtime(estimated_arrival)), self.transport
+        return None, self.transport
 
     def check_estimate(self):
         if self.estimate:

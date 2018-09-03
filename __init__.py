@@ -7,7 +7,7 @@ from .maps_connector import TripPlanner
 
 # mongo collection name
 AGENT_ID = 'googleMaps'
-INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Define the route, e.g. "from zoo schoenbrunn to TU wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "check" when you arrive at the destination\n4) Say "save" if you want to save the results'
+INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Specify the route, e.g. "from Zoo Schoenbrunn to tu wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "start" when you start the commute and "stop" when you arrive at the destination'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -15,11 +15,14 @@ def setup(opsdroid):
     opsdroid.tp = TripPlanner()
 
 
-def estimate(opsdroid, mode):
-    estimate = opsdroid.tp.record_estimate(mode)
+def estimate(opsdroid, mode=None):
+    if mode:
+        opsdroid.tp.choose_transport(mode)
+    estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
-        response = "You are going by %s estimated arrival time %s" % (mode, estimate)
+        response = 'You are going by %s estimated arrival time %s if you leave now. Say "start" when you leave later to correct the estimate.' % (mode, estimate)
         return response
+
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
 async def start(opsdroid, config, message):
@@ -73,8 +76,17 @@ async def choose_bike(opsdroid, config, message):
     if response:
         await message.respond(response)
 
-@match_regex(r'check|check in|ready|finish|fin|ok|here', case_sensitive=False)
-async def finish(opsdroid, config, message):
+
+@match_regex(r'start', case_sensitive=False)
+async def start_trip(opsdroid, config, message):
+    # use previously chosen transport mode
+    response = estimate(opsdroid)
+    if response:
+        await message.respond(response)
+
+
+@match_regex(r'stop|check|check in|ready|finish|fin|ok|here', case_sensitive=False)
+async def finish_trip(opsdroid, config, message):
     '''
     calculates difference between the estimated and actual arrival time
     '''
@@ -88,6 +100,8 @@ async def finish(opsdroid, config, message):
             await message.respond("You are %d minutes early" % minutes)
         else:
             await message.respond("You are just on time!")
+    # save on finish
+    save_to_DB(opsdroid, config, message)
 
 
 @match_regex(r'save|speichern|record|persist', case_sensitive=False)
@@ -103,7 +117,7 @@ async def save_to_DB(opsdroid, config, message):
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 
 
-@match_regex(r'start|help', case_sensitive=False)
+@match_regex(r'help', case_sensitive=False)
 async def help(opsdroid, config, message):
     match = True
     await message.respond(INSTRUCTION)
