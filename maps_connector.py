@@ -72,7 +72,7 @@ class TripPlanner(object):
 
         while estimates:
             time, (transport, time_str) = heappop(estimates)
-            route += "\n%s %s" % (transport, time_str)
+            route += "\n%s %s\n" % (transport, time_str)
         return route
 
     def choose_transport(self, transport):
