@@ -37,10 +37,9 @@ async def start(opsdroid, config, message):
     text = opsdroid.tp.rank_alternative_routes()
 
     # load error estimate from the previous history by user id
-    previous_errors = await opsdroid.memory.get(message.user)
-    last_error = previous_errors[0]
-
-    if last_error:
+    collected_errors = await opsdroid.memory.get(str(message.user))
+    if collected_errors:
+        last_error = collected_errors[0]
         error = last_error['error']
         if error > 0:
             minutes = int(error) / 60 % 60
@@ -118,13 +117,13 @@ async def save_to_DB(opsdroid, config, message):
         estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.mode, 'agent': AGENT_ID,
                           'origin': opsdroid.tp.origin, 'destination': opsdroid.tp.destination, 'timestamp': opsdroid.tp.timestamp}
         
-        collected_errors = await opsdroid.memory.get(message.user)
+        collected_errors = await opsdroid.memory.get(str(message.user))
         if collected_errors:
             collected_errors.append(estimate_error)
         else:
             collected_errors = [estimate_error]
         
-        await opsdroid.memory.put(message.user, collected_errors)
+        await opsdroid.memory.put(str(message.user), collected_errors)
         # db.put(key, api_error)
         await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 
