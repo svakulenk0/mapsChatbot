@@ -23,7 +23,7 @@ import googlemaps
 
 from .settings import API_KEY
 
-MODES = {"car": "driving", "public transport": "transit", "bike": "bicycling"}
+MODES = {"car": "driving", "offi": "transit", "bike": "bicycling"}
 
 
 # connect to Google Maps API
