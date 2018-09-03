@@ -81,10 +81,13 @@ async def choose_bike(opsdroid, config, message):
 
 @match_regex(r'start', case_sensitive=False)
 async def start_trip(opsdroid, config, message):
-    # use previously chosen transport mode
-    response = estimate(opsdroid)
-    if response:
-        await message.respond(response)
+    if opsdroid.tp.mode:
+        # use previously chosen transport mode
+        response = estimate(opsdroid)
+        if response:
+            await message.respond(response)
+    else:
+        help(opsdroid, config, message)
 
 
 @match_regex(r'stop|check|check in|ready|finish|fin|ok|here', case_sensitive=False)
