@@ -20,7 +20,7 @@ def estimate(opsdroid, mode=None):
         opsdroid.tp.choose_transport(mode)
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
-        response = 'You are going by %s estimated arrival time %s if you leave now. Say "start" when you leave.' % (mode, estimate)
+        response = 'You are going by %s estimated arrival time %s if you leave now.' % (mode, estimate)
         return response
 
 
@@ -62,20 +62,20 @@ async def start(opsdroid, config, message):
 async def choose_car(opsdroid, config, message):
     response = estimate(opsdroid, 'car')
     if response:
-        await message.respond(response)
+        await message.respond(response+' Say "start" when you leave.')
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
     response = estimate(opsdroid, 'public transport')
     if response:
-        await message.respond(response)
+        await message.respond(response+' Say "start" when you leave.')
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
     response = estimate(opsdroid, 'bike')
     if response:
-        await message.respond(response)
+        await message.respond(response+' Say "start" when you leave.')
 
 
 @match_regex(r'start', case_sensitive=False)
@@ -86,10 +86,10 @@ async def start_trip(opsdroid, config, message):
         if response:
             await message.respond(response)
     else:
-        help(opsdroid, config, message)
+        await help(opsdroid, config, message)
 
 
-@match_regex(r'stop|check|check in|ready|finish|fin|ok|here', case_sensitive=False)
+@match_regex(r'stop|check|check in|ready|finish|fin|here', case_sensitive=False)
 async def finish_trip(opsdroid, config, message):
     '''
     calculates difference between the estimated and actual arrival time
@@ -105,7 +105,7 @@ async def finish_trip(opsdroid, config, message):
         else:
             await message.respond("You are just on time!")
     # save on finish
-    save_to_DB(opsdroid, config, message)
+    await save_to_DB(opsdroid, config, message)
 
 
 @match_regex(r'save|speichern|record|persist', case_sensitive=False)
