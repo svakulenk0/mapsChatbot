@@ -41,24 +41,25 @@ async def show_options(opsdroid, config, message):
 
     text = opsdroid.tp.rank_alternative_routes()
 
-    # load error estimate from the previous history by user id
-    # last_error = await opsdroid.memory.get(AGENT_ID)
-    last_error = await opsdroid.memory.get('/'.join([AGENT_ID, 'user', str(message.user)]))
-    if last_error:
-        # last_error = collected_errors[0]
-        error = last_error['error']
-        if error > 0:
-            minutes = int(error) / 60 % 60
-            last_error_text = "%d minutes late" % minutes
-        elif error < 0:
-            minutes = int(-error) / 60 % 60
-            last_error_text = "%d minutes early" % minutes
-        else:
-            last_error_text = "just on time"
-        text += "\n\nLast time you were %s when travelling with the %s" % (last_error_text, last_error['transport'])
-
     # respond
     if text:
+        # load error estimate from the previous history by user id
+        # last_error = await opsdroid.memory.get(AGENT_ID)
+        last_error = await opsdroid.memory.get('/'.join([AGENT_ID, 'user', str(message.user)]))
+
+        if last_error:
+            # last_error = collected_errors[0]
+            error = last_error['error']
+            if error > 0:
+                minutes = int(error) / 60 % 60
+                last_error_text = "%d minutes late" % minutes
+            elif error < 0:
+                minutes = int(-error) / 60 % 60
+                last_error_text = "%d minutes early" % minutes
+            else:
+                last_error_text = "just on time"
+            text += "\n\nLast time you were %s when travelling with the %s" % (last_error_text, last_error['transport'])
+
         await message.respond(text+'\n\nChoose transport: car, bike or offi?')
     else:
         await message.respond("Not sure what you mean. Could you be more specific?")
