@@ -22,7 +22,7 @@ def estimate(opsdroid, mode=None):
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
         response = 'You are going by %s estimated arrival time %s if you leave now.' % (mode, estimate)
-        link = get_link()
+        link = opsdroid.tp.get_link()
         return response + link
 
 
