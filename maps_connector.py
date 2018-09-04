@@ -58,7 +58,7 @@ class TripPlanner(object):
         self.error = None
 
     def get_link(self):
-        return GM_LINK % ('+'.join(self.origin), '+'.join(self.destination), MODES[self.transport])
+        return GM_LINK % ('+'.join(self.origin.split()), '+'.join(self.destination.split()), MODES[self.transport])
 
     def rank_alternative_routes(self):
         '''
