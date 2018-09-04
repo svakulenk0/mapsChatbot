@@ -122,7 +122,11 @@ async def save_to_DB(opsdroid, config, message):
     '''
     if opsdroid.tp.error:
         estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.transport, 'user': str(message.user),
-                          'origin': opsdroid.tp.origin, 'destination': opsdroid.tp.destination, 'timestamp': opsdroid.tp.timestamp}
+                          'origin': opsdroid.tp.origin, 'destination': opsdroid.tp.destination,
+                          'starting_time': opsdroid.tp.format_time(opsdroid.tp.starting_time),
+                          'estimated_arrival': opsdroid.tp.format_time(opsdroid.tp.estimated_arrival),
+                          'actual_arrival': opsdroid.tp.format_time(opsdroid.tp.actual_arrival)}
+        
         await opsdroid.memory.put(AGENT_ID, data=estimate_error)
         # await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
 

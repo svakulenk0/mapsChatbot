@@ -52,9 +52,10 @@ class TripPlanner(object):
         # make transport choice
         self.transport = None
         # estimate prediction
-        self.estimate = None
+        self.starting_time = None
+        self.estimated_arrival = None
         # record observation
-        self.timestamp = None
+        self.actual_arrival = None
         self.error = None
 
     def get_link(self):
@@ -85,33 +86,35 @@ class TripPlanner(object):
     def choose_transport(self, transport):
         self.transport = transport
 
+    def format_time(self, timestamp):
+        return time.strftime("%H:%M", time.localtime(timestamp))
+
+
     def record_estimate(self):
         mode = MODES[self.transport]
         if self.origin and self.destination:
             response = get_route(self.origin, self.destination, mode)
             if response:
                 # round up 1 minute
-                now = time.time() + 60
+                self.starting_time = time.time() + 60
                 
                 # save estimate
                 if mode == 'transit':
-                    estimated_arrival = response[0]['legs'][0]['arrival_time']['value']
+                    self.estimated_arrival = response[0]['legs'][0]['arrival_time']['value']
                 else:
                     # estimated trip duration: number of seconds
                     estimated_duration = response[0]['legs'][0]['duration']['value']
                     # calculate arrival time
-                    estimated_arrival = now + estimated_duration
+                    self.estimated_arrival = self.starting_time + estimated_duration
 
-                self.estimate = (mode, estimated_arrival, now)
-                
                 # format arrival time
-                return time.strftime("%H:%M", time.localtime(estimated_arrival)), self.transport
+                return self.format_time(self.estimated_arrival), self.transport
         return None, self.transport
 
     def check_estimate(self):
-        if self.estimate:
-            self.timestamp = time.time()
-            self.error = self.timestamp - self.estimate[1]
+        if self.estimated_arrival:
+            self.actual_arrival = time.time()
+            self.error = self.actual_arrival - self.estimated_arrival
             return self.error
         return None
 
