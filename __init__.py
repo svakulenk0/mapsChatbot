@@ -8,7 +8,6 @@ from .maps_connector import TripPlanner
 # mongo collection name
 AGENT_ID = 'googleMaps'
 INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Specify the route, e.g. "from Zoo Schoenbrunn to tu wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "start" when you start the commute and "stop" when you arrive at the destination'
-START_REMINDER = '\n\nSay "start" when you leave.'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -16,14 +15,18 @@ def setup(opsdroid):
     opsdroid.tp = TripPlanner()
 
 
-def estimate(opsdroid, mode=None):
-    if mode:
-        opsdroid.tp.choose_transport(mode)
+def estimate(opsdroid):
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
-        response = 'You are going by %s estimated arrival time %s if you leave now.\n' % (mode, estimate)
-        link = opsdroid.tp.get_link()
+        response = 'You are going by %s estimated arrival time %s if you leave now.' % (mode, estimate)
         return response + link
+
+
+def plan(opsdroid, mode):
+    opsdroid.tp.choose_transport(mode)
+    response = estimate(opsdroid, mode) + ' Say "start" when you leave.\n'
+    link = opsdroid.tp.get_link()
+    return response + link
 
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
@@ -63,22 +66,22 @@ async def show_options(opsdroid, config, message):
 
 @match_regex(r'car|auto', case_sensitive=False)
 async def choose_car(opsdroid, config, message):
-    response = estimate(opsdroid, 'car')
+    response = plan_trip(opsdroid, 'car')
     if response:
-        await message.respond(response+START_REMINDER)
+        await message.respond(response)
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
-    response = estimate(opsdroid, 'offi')
+    response = plan_trip(opsdroid, 'offi')
     if response:
-        await message.respond(response+START_REMINDER)
+        await message.respond(response)
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
-    response = estimate(opsdroid, 'bike')
+    response = plan_trip(opsdroid, 'bike')
     if response:
-        await message.respond(response+START_REMINDER)
+        await message.respond(response)
 
 
 @match_regex(r'start', case_sensitive=False)
