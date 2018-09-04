@@ -22,7 +22,7 @@ def estimate(opsdroid):
         return response + link
 
 
-def plan(opsdroid, mode):
+def plan_trip(opsdroid, mode):
     opsdroid.tp.choose_transport(mode)
     response = estimate(opsdroid, mode) + ' Say "start" when you leave.\n'
     link = opsdroid.tp.get_link()
