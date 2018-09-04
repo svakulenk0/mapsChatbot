@@ -8,6 +8,7 @@ from .maps_connector import TripPlanner
 # mongo collection name
 AGENT_ID = 'googleMaps'
 INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Specify the route, e.g. "from Zoo Schoenbrunn to tu wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "start" when you start the commute and "stop" when you arrive at the destination'
+START_REMINDER = '\nSay "start" when you leave.'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -21,7 +22,8 @@ def estimate(opsdroid, mode=None):
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
         response = 'You are going by %s estimated arrival time %s if you leave now.' % (mode, estimate)
-        return response
+        link = get_link()
+        return response + link
 
 
 @match_regex(r'from (.*) to (.*)', case_sensitive=False)
@@ -53,7 +55,7 @@ async def show_options(opsdroid, config, message):
 
     # respond
     if text:
-        await message.respond(text+'\n\nChoose transport.')
+        await message.respond(text+'\n\nChoose transport: car, bike or offi?')
     else:
         await message.respond("Not sure what you mean. Could you be more specific?")
 
@@ -62,20 +64,20 @@ async def show_options(opsdroid, config, message):
 async def choose_car(opsdroid, config, message):
     response = estimate(opsdroid, 'car')
     if response:
-        await message.respond(response+' Say "start" when you leave.')
+        await message.respond(response+START_REMINDER)
 
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
     response = estimate(opsdroid, 'public transport')
     if response:
-        await message.respond(response+' Say "start" when you leave.')
+        await message.respond(response+START_REMINDER)
 
 @match_regex(r'bike|bicycle|cycle|cycling', case_sensitive=False)
 async def choose_bike(opsdroid, config, message):
     response = estimate(opsdroid, 'bike')
     if response:
-        await message.respond(response+' Say "start" when you leave.')
+        await message.respond(response+START_REMINDER)
 
 
 @match_regex(r'start', case_sensitive=False)

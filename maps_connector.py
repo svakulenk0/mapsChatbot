@@ -15,6 +15,9 @@ Test API call: https://maps.googleapis.com/maps/api/directions/json?origin=WU+Wi
 Test API call: https://maps.googleapis.com/maps/api/directions/json?origin=WU+Wien&destination=Zoo+Schoenbrunn&mode=driving&key=x
 Test API call: https://maps.googleapis.com/maps/api/directions/json?origin=WU+Wien&destination=Zoo+Schoenbrunn&mode=bicycling&key=x
 
+Link to the map with the route on Google maps:
+https://www.google.com/maps/dir/?api=1&origin=tu+wien&destination=wu+wien&travelmode=transit
+
 '''
 import time
 from heapq import heappush, heappop
@@ -24,6 +27,7 @@ import googlemaps
 from .settings import API_KEY
 
 MODES = {"car": "driving", "offi": "transit", "bike": "bicycling"}
+GM_LINK = "https://www.google.com/maps/dir/?api=1&origin=%s&destination=%s&travelmode=%s"
 
 
 # connect to Google Maps API
@@ -52,6 +56,9 @@ class TripPlanner(object):
         # record observation
         self.timestamp = None
         self.error = None
+
+    def get_link(self):
+        return GM_LINK % ('+'.join(self.origin), '+'.join(self.destination), MODES[self.transport])
 
     def rank_alternative_routes(self):
         '''
