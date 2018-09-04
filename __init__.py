@@ -69,7 +69,7 @@ async def choose_car(opsdroid, config, message):
 
 @match_regex(r'public transport|public|öffi|oeffi|offi|bim|ubahn|u-bahn|metro|bus|trolley', case_sensitive=False)
 async def choose_public(opsdroid, config, message):
-    response = estimate(opsdroid, 'public transport')
+    response = estimate(opsdroid, 'offi')
     if response:
         await message.respond(response+START_REMINDER)
 
