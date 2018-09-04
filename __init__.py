@@ -8,7 +8,7 @@ from .maps_connector import TripPlanner
 # mongo collection name
 AGENT_ID = 'googleMaps'
 INSTRUCTION = 'Hi! I can help you to estimate the time of your commute.\nYou can send me these commands:\n1) Specify the route, e.g. "from Zoo Schoenbrunn to tu wien"\n2) Choose transportation option: "car", "offi" or "bike"\n3) Say "start" when you start the commute and "stop" when you arrive at the destination'
-START_REMINDER = '\nSay "start" when you leave.'
+START_REMINDER = '\n\nSay "start" when you leave.'
 # connect to the DB
 # db = DatabaseMongo()
 
@@ -21,7 +21,7 @@ def estimate(opsdroid, mode=None):
         opsdroid.tp.choose_transport(mode)
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
-        response = 'You are going by %s estimated arrival time %s if you leave now.' % (mode, estimate)
+        response = 'You are going by %s estimated arrival time %s if you leave now.\n' % (mode, estimate)
         link = opsdroid.tp.get_link()
         return response + link
 

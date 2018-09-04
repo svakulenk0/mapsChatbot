@@ -27,7 +27,7 @@ import googlemaps
 from .settings import API_KEY
 
 MODES = {"car": "driving", "offi": "transit", "bike": "bicycling"}
-GM_LINK = "https://www.google.com/maps/dir/?api=1&origin=%s&destination=%s&travelmode=%s"
+GM_LINK = "https://www.google.com/maps/dir/?api=1&origin=%s&destination=%s&travelmode=%s\n"
 
 
 # connect to Google Maps API
