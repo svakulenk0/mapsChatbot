@@ -19,7 +19,7 @@ def estimate(opsdroid):
     estimate, mode = opsdroid.tp.record_estimate()
     if estimate:
         response = 'You are going by %s estimated arrival time %s if you leave now.' % (mode, estimate)
-        return response + link
+        return response
 
 
 def plan_trip(opsdroid, mode):
