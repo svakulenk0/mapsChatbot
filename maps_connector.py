@@ -57,6 +57,8 @@ class TripPlanner(object):
         # record observation
         self.actual_arrival = None
         self.error = None
+        self.error_minutes = None
+        self.error_sign = None
 
     def get_link(self):
         return GM_LINK % ('+'.join(self.origin.split()), '+'.join(self.destination.split()), MODES[self.transport])
@@ -115,7 +117,15 @@ class TripPlanner(object):
         if self.estimated_arrival:
             self.actual_arrival = time.time()
             self.error = self.actual_arrival - self.estimated_arrival
-            return self.error
+            if self.error > 0:
+                self.error_minutes = int(self.error) / 60 % 60
+                self.error_sign = 'late'
+            elif self.error < 0:
+                self.error_minutes = int(-self.error) / 60 % 60
+                self.error_sign = 'early'
+            else:
+                self.error_minutes = 0
+                self.error_sign = 'on time'
         return None
 
 

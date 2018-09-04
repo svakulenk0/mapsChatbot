@@ -101,18 +101,17 @@ async def finish_trip(opsdroid, config, message):
     '''
     calculates difference between the estimated and actual arrival time
     '''
-    error = opsdroid.tp.check_estimate()
-    if error:
-        if error > 0:
-            minutes = int(error) / 60 % 60
-            await message.respond("You are %d minutes late" % minutes)
-        elif error < 0:
-            minutes = int(-error) / 60 % 60
-            await message.respond("You are %d minutes early" % minutes)
-        else:
+    opsdroid.tp.check_estimate()
+    
+    if opsdroid.tp.error:
+
+        if opsdroid.tp.error == 0:
             await message.respond("You are just on time!")
-    # save on finish
-    await save_to_DB(opsdroid, config, message)
+        else:
+            await message.respond("You are %d minutes %s" % (opsdroid.tp.error_minutes, opsdroid.tp.error_sign))
+            
+        # save on finish
+        await save_to_DB(opsdroid, config, message)
 
 
 @match_regex(r'save|speichern|record|persist', case_sensitive=False)
@@ -121,11 +120,16 @@ async def save_to_DB(opsdroid, config, message):
     save the user_id, route details (origin/destination/transport) and error to DB, e.g. through the mongo connector
     '''
     if opsdroid.tp.error:
-        estimate_error = {'error': opsdroid.tp.error, 'transport': opsdroid.tp.transport, 'user': str(message.user),
+        estimate_error = {'transport': opsdroid.tp.transport, 'user': str(message.user),
                           'origin': opsdroid.tp.origin, 'destination': opsdroid.tp.destination,
-                          'starting_time': opsdroid.tp.format_time(opsdroid.tp.starting_time),
-                          'estimated_arrival': opsdroid.tp.format_time(opsdroid.tp.estimated_arrival),
-                          'actual_arrival': opsdroid.tp.format_time(opsdroid.tp.actual_arrival)}
+                          'error': opsdroid.tp.error, 'error_minutes': opsdroid.tp.error_minutes,
+                          'error_sign': opsdroid.tp.error_sign,
+                          'starting_time': opsdroid.tp.starting_time,
+                          'starting_time_str': opsdroid.tp.format_time(opsdroid.tp.starting_time),
+                          'estimated_arrival': opsdroid.tp.estimated_arrival,
+                          'estimated_arrival_str': opsdroid.tp.format_time(opsdroid.tp.estimated_arrival),
+                          'actual_arrival': opsdroid.tp.actual_arrival,
+                          'actual_arrival_str': opsdroid.tp.format_time(opsdroid.tp.actual_arrival)}
         
         await opsdroid.memory.put(AGENT_ID, data=estimate_error)
         # await message.respond("Saved estimate for the route from %s" % opsdroid.tp.origin)
